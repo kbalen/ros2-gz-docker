@@ -1,15 +1,43 @@
-version: '3.8'
+version: "3.8"
 
 services:
   ros2-gazebo:
     build: .
     ports:
-      - "11311:11311"  # ROS 2 default port
-      - "8080:8080"    # Guacamole web application
-      - "4822:4822"    # guacd
-      - "5900:5900"    # VNC server
+      - "11311:11311" # ROS 2 default port
+      - "8080:8080" # Guacamole web application
+      - "4822:4822" # guacd
+      - "5900:5900" # VNC server
     environment:
       - DISPLAY=:99
-    shm_size: '2gb'  # Increase shared memory size for Gazebo
+    shm_size: "4gb"
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      memlock: -1
+      stack: 67108864
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 8G
+        reservations:
+          cpus: "2"
+          memory: 4G
+    # Uncomment the following line if you have NVIDIA GPU support
+    # runtime: nvidia
+    sysctls:
+      net.core.somaxconn: 1024
+      net.ipv4.tcp_max_syn_backlog: 1024
+      net.ipv4.tcp_slow_start_after_idle: 0
+      net.ipv4.tcp_rmem: "4096 87380 16777216"
+      net.ipv4.tcp_wmem: "4096 87380 16777216"
+      net.ipv4.tcp_keepalive_time: 60
+      net.ipv4.tcp_keepalive_intvl: 10
+      net.ipv4.tcp_keepalive_probes: 6
     tty: true
     stdin_open: true

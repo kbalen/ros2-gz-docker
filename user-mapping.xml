@@ -5,6 +5,20 @@
       <param name="hostname">localhost</param>
       <param name="port">5900</param>
       <param name="password"></param>
+      <param name="color-depth">24</param>
+      <param name="encoding">h264</param>
+      <param name="compression">9</param>
+      <param name="quality">80</param>
+      <param name="cursor">remote</param>
+      <param name="swap-red-blue">false</param>
+      <param name="transfer-mode">image</param>
+      <param name="enable-audio">false</param>
+      <param name="enable-printing">false</param>
+      <param name="enable-drive">false</param>
+      <param name="create-drive-path">false</param>
+      <param name="enable-sftp">false</param>
+      <param name="resize-method">display-update</param>
+      <param name="read-only">false</param>
     </connection>
   </authorize>
 </user-mapping> 
