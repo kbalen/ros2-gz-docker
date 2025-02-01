@@ -5,11 +5,11 @@ services:
     build: .
     ports:
       - "11311:11311"  # ROS 2 default port
-      - "8080:8080"    # Example port for GUI access if needed
+      - "8080:8080"    # Guacamole web application
+      - "4822:4822"    # guacd
+      - "5900:5900"    # VNC server
     environment:
       - DISPLAY=:99
-    # volumes:
-    #   - /tmp/.X11-unix:/tmp/.X11-unix  # Allow access to the X server
     shm_size: '2gb'  # Increase shared memory size for Gazebo
     tty: true
     stdin_open: true
