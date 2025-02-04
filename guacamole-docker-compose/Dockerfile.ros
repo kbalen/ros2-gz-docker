@@ -1,0 +1,36 @@
+FROM osrf/ros:humble-desktop
+
+# Prevent interactive prompts during build
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install VNC, X11, and browser dependencies
+RUN apt-get update && apt-get install -y \
+    x11vnc \
+    xvfb \
+    openbox \
+    supervisor \
+    net-tools \
+    curl \
+    python3-pip \
+    ros-humble-gazebo-ros-pkgs \
+    ros-humble-turtlebot3 \
+    ros-humble-turtlebot3-simulations \
+    ros-humble-turtlebot3-gazebo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up VNC password
+RUN mkdir ~/.vnc && x11vnc -storepasswd guacamole ~/.vnc/passwd
+
+# Copy supervisor configuration
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Set up workspace
+RUN mkdir -p /root/ros2_ws/src
+WORKDIR /root/ros2_ws
+
+# Source ROS 2 environment and set Turtlebot3 model
+RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc && \
+    echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
+
+# Start supervisord
+CMD ["/usr/bin/supervisord"] 
