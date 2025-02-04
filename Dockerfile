@@ -4,25 +4,25 @@ FROM osrf/ros:humble-desktop
 # Install Gazebo packages, xvfb, and x11-xserver-utils (if needed)
 RUN apt-get update && \
     apt-get install -y \
-      ros-humble-gazebo-ros-pkgs \
-      ros-humble-gazebo-plugins \
-      xvfb \
-      fluxbox \
-      x11vnc \
-      tomcat9 \
-      wget \
-      supervisor \
-      guacd \
-      mesa-utils \
-      libgl1-mesa-dri \
-      libgl1-mesa-glx \
-      libglx-mesa0 \
-      libglu1-mesa \
-      libegl1 \
-      libopengl0 \
-      ros-humble-turtlebot3* \
-      x11-xserver-utils \
-      default-jdk && \
+    ros-humble-gazebo-ros-pkgs \
+    ros-humble-gazebo-plugins \
+    xvfb \
+    fluxbox \
+    x11vnc \
+    tomcat9 \
+    wget \
+    supervisor \
+    guacd \
+    mesa-utils \
+    libgl1-mesa-dri \
+    libgl1-mesa-glx \
+    libglx-mesa0 \
+    libglu1-mesa \
+    libegl1 \
+    libopengl0 \
+    ros-humble-turtlebot3* \
+    x11-xserver-utils \
+    default-jdk && \
     rm -rf /var/lib/apt/lists/*
 
 # Source ROS2 in .bashrc

@@ -8,36 +8,15 @@ services:
       - "8080:8080" # Guacamole web application
       - "4822:4822" # guacd
       - "5900:5900" # VNC server
+    volumes:
+      - ./ros_ws:/root/ros_ws
+      - ./cache/.gazebo:/root/.gazebo # Gazebo configurations and models
+      - ./cache/.ros:/root/.ros # ROS 2 logs and runtime data
+      - ./cache/.ignition:/root/.ignition # Ignition/Gazebo configs
+      - ./cache/.sdformat:/root/.sdformat # SDF format configs
+      - ./cache/.colcon:/root/.colcon # Colcon build system data
     environment:
       - DISPLAY=:99
-    shm_size: "4gb"
-    cap_add:
-      - SYS_NICE
-    ulimits:
-      memlock: -1
-      stack: 67108864
-      nproc: 65535
-      nofile:
-        soft: 65535
-        hard: 65535
-    deploy:
-      resources:
-        limits:
-          cpus: "4"
-          memory: 8G
-        reservations:
-          cpus: "2"
-          memory: 4G
-    # Uncomment the following line if you have NVIDIA GPU support
-    # runtime: nvidia
-    sysctls:
-      net.core.somaxconn: 1024
-      net.ipv4.tcp_max_syn_backlog: 1024
-      net.ipv4.tcp_slow_start_after_idle: 0
-      net.ipv4.tcp_rmem: "4096 87380 16777216"
-      net.ipv4.tcp_wmem: "4096 87380 16777216"
-      net.ipv4.tcp_keepalive_time: 60
-      net.ipv4.tcp_keepalive_intvl: 10
-      net.ipv4.tcp_keepalive_probes: 6
+
     tty: true
     stdin_open: true

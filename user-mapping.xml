@@ -4,7 +4,7 @@
       <protocol>vnc</protocol>
       <param name="hostname">localhost</param>
       <param name="port">5900</param>
-      <param name="password"></param>
+      <!-- <param name="password"></param>
       <param name="color-depth">24</param>
       <param name="encoding">h264</param>
       <param name="compression">9</param>
@@ -18,7 +18,7 @@
       <param name="create-drive-path">false</param>
       <param name="enable-sftp">false</param>
       <param name="resize-method">display-update</param>
-      <param name="read-only">false</param>
+      <param name="read-only">false</param> -->
     </connection>
   </authorize>
 </user-mapping> 
