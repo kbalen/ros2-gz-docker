@@ -1,0 +1,26 @@
+{
+    "name": "ROS 2 Gazebo Development",
+    "dockerComposeFile": ["../docker-compose.yml"],
+    "service": "ros2-gazebo",
+    "workspaceFolder": "/root/ros_ws",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "twxs.cmake",
+                "ms-iot.vscode-ros"
+            ]
+        }
+    },
+    "remoteUser": "root",
+    "overrideCommand": false,
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true,
+            "installOhMyZsh": true
+        }
+    }
+} 
