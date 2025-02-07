@@ -67,8 +67,14 @@ RUN chown tomcat:tomcat /etc/guacamole/guacamole.properties && \
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Source Gazebo in .bashrc
-RUN echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
+RUN echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc && \
+    echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:\$HOME/ros_ws/src" >> ~/.bashrc
 
+# Create ROS workspace
+RUN mkdir -p /root/ros_ws/src
+
+# Set GAZEBO_MODEL_PATH environment variable
+ENV GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:/root/ros_ws/src
 
 # Expose the necessary ports
 EXPOSE 8080 4822 5900
