@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- ros control plugin -->
+  <xacro:macro name="ros_control">
+    <gazebo>
+      <!-- Commenting out ROS 1 control plugin
+      <plugin name="ros_control" filename="libgazebo_ros_control.so">
+        <controlPeriod>0.001</controlPeriod>
+        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        <legacyModeNS>false</legacyModeNS>
+      </plugin>
+      -->
+      <!-- ROS 2 control plugin -->
+      <plugin name='gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
+        <parameters>$(find rbcar_model)/config/rbcar_controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+  <!-- No Ackermann steering plugin -->
+  <xacro:macro name="omni_steering" params="prefix publish_tf">
+    <gazebo>
+      <!-- Commenting out ROS 1 planar move plugin
+      <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
+        <commandTopic>robotnik_base_controller/cmd_vel</commandTopic>
+        <odometryTopic>robotnik_base_controller/odom</odometryTopic>
+        <odometryFrame>${prefix}odom</odometryFrame>
+        <odometryRate>50.0</odometryRate>
+        <robotBaseFrame>${prefix}base_footprint</robotBaseFrame>
+        <publishTF>${publish_tf}</publishTF>
+      </plugin>
+      -->
+      <!-- ROS 2 planar move plugin -->
+      <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
+        <ros>
+          <namespace>/</namespace>
+        </ros>
+        <update_rate>50.0</update_rate>
+        <left_joint>left_front_axle</left_joint>
+        <right_joint>right_front_axle</right_joint>
+        <wheel_separation>${wheel_offset_y * 2}</wheel_separation>
+        <wheel_diameter>${tire_dia}</wheel_diameter>
+        <max_wheel_torque>${axle_eff_limit}</max_wheel_torque>
+        <max_wheel_acceleration>10.0</max_wheel_acceleration>
+        <publish_odom>true</publish_odom>
+        <publish_odom_tf>true</publish_odom_tf>
+        <publish_wheel_tf>true</publish_wheel_tf>
+        <odometry_frame>odom</odometry_frame>
+        <robot_base_frame>base_footprint</robot_base_frame>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+  <gazebo reference="base_footprint">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+</robot>

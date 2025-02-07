@@ -66,6 +66,10 @@ RUN chown tomcat:tomcat /etc/guacamole/guacamole.properties && \
 # Copy the supervisord configuration file
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Source Gazebo in .bashrc
+RUN echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
+
+
 # Expose the necessary ports
 EXPOSE 8080 4822 5900
 
