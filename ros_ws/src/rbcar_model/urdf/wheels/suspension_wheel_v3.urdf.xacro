@@ -153,7 +153,8 @@
         </xacro:if>
         <geometry>
           <!--cylinder radius="${tire_dia / 2}" length="${tire_width}"/-->
-          <mesh filename="package://rbcar_model/meshes/wheels/polaris/right_front_wheel.STL"/>
+          <!-- <mesh filename="package://rbcar_model/meshes/wheels/polaris/right_front_wheel.STL"/> -->
+          <mesh filename="package://rbcar_model/meshes/wheels/rbcar_wheel.stl"/>
         </geometry>
         <material name="tire_mat"/>
       </visual>

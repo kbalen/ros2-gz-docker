@@ -1,0 +1,19 @@
+
+services:
+  ros2-gazebo:
+    build: .
+    container_name: ros2_gazebo
+    ports:
+      - "6080:6080" # noVNC/websockify port for browser access
+      - "5901:5901" # VNC server port
+    volumes:
+      - ../ros_ws:/root/ros_ws
+      - ../cache/.gazebo:/home/ros/.gazebo # Gazebo configurations and models
+      - ../cache/.ros:/home/ros/.ros # ROS 2 logs and runtime data
+      - ../cache/.ignition:/home/ros/.ignition # Ignition/Gazebo configs
+      - ../cache/.sdformat:/home/ros/.sdformat # SDF format configs
+      - ../cache/.colcon:/home/ros/.colcon # Colcon build system data
+    environment:
+      # If you need any environment variables you can add them here.
+      - DISPLAY=:1
+    restart: unless-stopped
