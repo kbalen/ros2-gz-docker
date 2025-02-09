@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     ros-humble-gazebo-ros-pkgs \
     ros-humble-gazebo-plugins \
     ros-humble-turtlebot3* \
-    xvfb \
+    mesa-utils \
     openbox \
     xterm \
     novnc \
