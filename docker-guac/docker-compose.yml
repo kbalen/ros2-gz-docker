@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  ros2-gazebo:
+    env_file: ".env"
+    build: .
+    ports:
+      - "11311:11311" # ROS 2 default port
+      - "8080:8080" # Guacamole web application
+      - "4822:4822" # guacd
+      - "5900:5900" # VNC server
+    volumes:
+      - ${ROS_WS_PATH:-../ros_ws}:/root/ros_ws
+      - ../cache/.gazebo:/root/.gazebo # Gazebo configurations and models
+      - ../cache/.ros:/root/.ros # ROS 2 logs and runtime data
+      - ../cache/.ignition:/root/.ignition # Ignition/Gazebo configs
+      - ../cache/.sdformat:/root/.sdformat # SDF format configs
+      - ../cache/.colcon:/root/.colcon # Colcon build system data
+    environment:
+      - DISPLAY=:99
+
+    tty: true
+    stdin_open: true
